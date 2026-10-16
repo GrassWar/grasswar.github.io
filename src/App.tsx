@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState, type CSSProperties, type ReactNode } from "react";
+import { useCallback, useEffect, useMemo, useState, type CSSProperties, type MouseEvent, type ReactNode } from "react";
 
 type Weapon = {
   name: string;
@@ -529,6 +529,17 @@ function LogoDesign({ onBack }: { onBack: () => void }) {
 }
 
 const APP_STORE_URL = "";
+const PRIVACY_PATH = "/privacy";
+
+function isPrivacyPath(pathname = window.location.pathname) {
+  return pathname.replace(/\/+$/, "") === PRIVACY_PATH;
+}
+
+function followPrivacyLink(event: MouseEvent<HTMLAnchorElement>, navigate: () => void) {
+  if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.button !== 0) return;
+  event.preventDefault();
+  navigate();
+}
 
 const STORE_SCREENSHOTS = [
   { file: "01-childhood-field.png", alt: "野草大作战宣传截图：一挥棍，回到那年夏天", label: "重返童年田野" },
@@ -560,7 +571,7 @@ function OfficialWebsite({
         <div className="official-nav-links">
           <Button onClick={() => scrollTo("features")}>玩法</Button>
           <Button onClick={() => scrollTo("showcase")}>游戏画面</Button>
-          <Button onClick={onPrivacy}>隐私政策</Button>
+          <a className="button" href={PRIVACY_PATH} onClick={(event) => followPrivacyLink(event, onPrivacy)}>隐私政策</a>
         </div>
         <Button className="official-play-nav" onClick={() => scrollTo("download")}>开始游戏 <b>›</b></Button>
       </nav>
@@ -687,7 +698,7 @@ function OfficialWebsite({
       <footer className="official-footer">
         <div className="official-footer-brand"><strong>野草大作战</strong><span>风吹过田野，也吹回了小时候</span></div>
         <div className="official-footer-links">
-          <Button onClick={onPrivacy}>隐私政策</Button>
+          <a className="button" href={PRIVACY_PATH} onClick={(event) => followPrivacyLink(event, onPrivacy)}>隐私政策</a>
           <span>© 2026 童年田野计划</span>
         </div>
       </footer>
@@ -699,7 +710,7 @@ function PrivacyPolicy({ onBack, onPlay }: { onBack: () => void; onPlay: () => v
   return (
     <main className="privacy-site">
       <nav className="privacy-nav">
-        <Button className="privacy-back" onClick={onBack}>‹ 返回官网</Button>
+        <a className="button privacy-back" href="/" onClick={(event) => followPrivacyLink(event, onBack)}>‹ 返回官网</a>
         <div className="privacy-brand"><strong>野草大作战</strong><span>隐私政策</span></div>
         <Button className="privacy-play" onClick={onPlay}>进入游戏</Button>
       </nav>
@@ -1391,7 +1402,10 @@ function SnackScreen({ complete, onDone }: { complete: boolean; onDone: () => vo
 
 export default function App() {
   const [screen, setScreen] = useState<"official" | "privacy" | "home" | "game" | "profile" | "grassCatalog" | "stickCatalog" | "levelMap" | "levelDetail" | "hiddenLevel" | "snack" | "logo" | "appStore">(
-    () => new URLSearchParams(window.location.search).get("design") === "app-store" ? "appStore" : "official",
+    () => {
+      if (isPrivacyPath()) return "privacy";
+      return new URLSearchParams(window.location.search).get("design") === "app-store" ? "appStore" : "official";
+    },
   );
   const [profile, setProfile] = useState<PlayerProfile>(loadProfile);
   const [introing, setIntroing] = useState(true);
@@ -1538,6 +1552,34 @@ export default function App() {
   }, []);
 
   useEffect(() => {
+    const syncRoute = () => {
+      if (isPrivacyPath()) {
+        setScreen("privacy");
+        return;
+      }
+      setScreen((current) => (current === "privacy" ? "official" : current));
+    };
+    window.addEventListener("popstate", syncRoute);
+    return () => window.removeEventListener("popstate", syncRoute);
+  }, []);
+
+  useEffect(() => {
+    document.title = screen === "privacy" ? "隐私政策 · 野草大作战" : "野草大作战";
+  }, [screen]);
+
+  const openPrivacy = () => {
+    if (!isPrivacyPath()) window.history.pushState({ screen: "privacy" }, "", PRIVACY_PATH);
+    setScreen("privacy");
+    window.scrollTo(0, 0);
+  };
+
+  const leavePrivacy = (next: "official" | "home") => {
+    if (isPrivacyPath()) window.history.pushState({ screen: next }, "", "/");
+    setScreen(next);
+    window.scrollTo(0, 0);
+  };
+
+  useEffect(() => {
     if (screen !== "snack") return;
     setSnackComplete(false);
     const timer = window.setTimeout(() => {
@@ -1589,11 +1631,11 @@ export default function App() {
   };
 
   if (screen === "official") {
-    return <OfficialWebsite onPlay={() => setScreen("home")} onPrivacy={() => setScreen("privacy")} />;
+    return <OfficialWebsite onPlay={() => setScreen("home")} onPrivacy={openPrivacy} />;
   }
 
   if (screen === "privacy") {
-    return <PrivacyPolicy onBack={() => setScreen("official")} onPlay={() => setScreen("home")} />;
+    return <PrivacyPolicy onBack={() => leavePrivacy("official")} onPlay={() => leavePrivacy("home")} />;
   }
 
   if (screen === "home") {
