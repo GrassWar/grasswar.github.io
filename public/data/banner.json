@@ -41,7 +41,7 @@
       "id": "game-bottom",
       "type": "gameBottom",
       "triggerTime": 15,
-      "duration": 8,
+      "duration": -1,
       "cancelable": true,
       "image": "https://grasswar.github.io/banners/hidden.png",
       "link": "https://grasswar.github.io/"
@@ -50,7 +50,7 @@
       "id": "game-popup",
       "type": "gamePopup",
       "triggerTime": 30,
-      "duration": 5,
+      "duration": -1,
       "cancelable": false,
       "image": "https://grasswar.github.io/banners/hidden.png",
       "link": "https://grasswar.github.io/"
