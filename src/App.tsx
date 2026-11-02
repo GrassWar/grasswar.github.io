@@ -528,7 +528,7 @@ function LogoDesign({ onBack }: { onBack: () => void }) {
   );
 }
 
-const APP_STORE_URL = "";
+const APP_STORE_URL = "https://apps.apple.com/us/app/%E9%87%8E%E8%8D%89%E5%A4%A7%E4%BD%9C%E6%88%98/id6822747364?l=zh-Hans-CN";
 const PRIVACY_PATH = "/privacy";
 
 function isPrivacyPath(pathname = window.location.pathname) {
