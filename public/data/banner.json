@@ -2,10 +2,10 @@
   "interval": 3.6,
   "banners": [
     {
-      "id": "basics",
+      "id": "basic",
       "type": "home",
       "layout": "backgroundText",
-      "image": "https://grasswar.github.io/banners/basics.png",
+      "image": "https://grasswar.github.io/banners/basic.png",
       "link": "",
       "kicker": "基础玩法",
       "title": "点击野草，挥棍出击",
@@ -30,12 +30,32 @@
       "copyOpacity": 0.72
     },
     {
-      "id": "hidden",
+      "id": "secret",
       "type": "home",
-      "layout": "fullImage",
-      "image": "https://grasswar.github.io/banners/hidden.png",
-      "link": "https://grasswar.github.io/",
-      "title": "通过 20 关，秘境开启"
+      "layout": "backgroundText",
+      "image": "https://grasswar.github.io/banners/secret.png",
+      "link": "",
+      "kicker": "通关秘密",
+      "title": "通过 20 关，秘境开启",
+      "copy": "完成全部童年场景，解锁整株商陆隐藏关卡。",
+      "kickerColor": "#EFC476",
+      "titleColor": "#FFF9E8",
+      "copyColor": "#FFFFFF",
+      "copyOpacity": 0.72
+    },
+    {
+      "id": "plants",
+      "type": "home",
+      "layout": "backgroundText",
+      "image": "https://grasswar.github.io/banners/plants.png",
+      "link": "https://www.inaturalist.org/",
+      "kicker": "田野之外",
+      "title": "想知道路边的小草叫什么？",
+      "copy": "前往 iNaturalist，认识更多植物。",
+      "kickerColor": "#EFC476",
+      "titleColor": "#FFF9E8",
+      "copyColor": "#FFFFFF",
+      "copyOpacity": 0.72
     },
     {
       "id": "game-bottom",
@@ -43,8 +63,8 @@
       "triggerTime": 15,
       "duration": -1,
       "cancelable": true,
-      "image": "https://grasswar.github.io/banners/hidden.png",
-      "link": "https://grasswar.github.io/"
+      "image": "https://grasswar.github.io/banners/explore.png",
+      "link": "https://www.inaturalist.org/"
     },
     {
       "id": "game-popup",
@@ -52,8 +72,8 @@
       "triggerTime": 30,
       "duration": -1,
       "cancelable": false,
-      "image": "https://grasswar.github.io/banners/hidden.png",
-      "link": "https://grasswar.github.io/"
+      "image": "https://grasswar.github.io/banners/discovery.png",
+      "link": "https://www.inaturalist.org/"
     }
   ]
 }
