@@ -48,10 +48,10 @@
       "type": "home",
       "layout": "backgroundText",
       "image": "https://grasswar.github.io/banners/plants.png",
-      "link": "https://www.inaturalist.org/",
-      "kicker": "田野之外",
+      "link": "https://www.inaturalist.org",
+      "kicker": "田野之外 · 继续探索",
       "title": "想知道路边的小草叫什么？",
-      "copy": "前往 iNaturalist，认识更多植物。",
+      "copy": "前往 iNaturalist，探索更多植物与身边的自然发现。",
       "kickerColor": "#EFC476",
       "titleColor": "#FFF9E8",
       "copyColor": "#FFFFFF",
@@ -64,7 +64,7 @@
       "duration": -1,
       "cancelable": true,
       "image": "https://grasswar.github.io/banners/explore.png",
-      "link": "https://www.inaturalist.org/"
+      "link": "https://www.inaturalist.org"
     },
     {
       "id": "game-popup",
@@ -73,7 +73,7 @@
       "duration": -1,
       "cancelable": false,
       "image": "https://grasswar.github.io/banners/discovery.png",
-      "link": "https://www.inaturalist.org/"
+      "link": "https://www.inaturalist.org"
     }
   ]
 }
