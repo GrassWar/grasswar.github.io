@@ -56,24 +56,6 @@
       "titleColor": "#FFF9E8",
       "copyColor": "#FFFFFF",
       "copyOpacity": 0.72
-    },
-    {
-      "id": "game-bottom",
-      "type": "gameBottom",
-      "triggerTime": 15,
-      "duration": -1,
-      "cancelable": true,
-      "image": "https://grasswar.github.io/banners/explore.png",
-      "link": "https://www.inaturalist.org"
-    },
-    {
-      "id": "game-popup",
-      "type": "gamePopup",
-      "triggerTime": 30,
-      "duration": -1,
-      "cancelable": false,
-      "image": "https://grasswar.github.io/banners/discovery.png",
-      "link": "https://www.inaturalist.org"
     }
   ]
 }
